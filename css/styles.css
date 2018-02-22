@@ -435,6 +435,7 @@ input[type=submit]:hover {
 #menu{
   background: url('../images/background2.jpg') no-repeat;
   background-size: cover;
+  background-position: center;
   position: relative;
 }
 #top-header{
@@ -668,11 +669,11 @@ a div.action_box {
 }
 #feature{
   content: ""; 
-  width: 69%;
+  width: 66%;
   height: 600px;
   position: relative;
-  left: 21vw;
-  top: 220vh;
+  left: 19vw;
+  top: 170vh;
 
 }
 .feature-picture{
@@ -934,7 +935,6 @@ a div.action_box {
     top: 63%;
     width: 16vw;
     height: 6vh;
-    background-color: green
   }
   #specialCarousel{
     content: ""; 
@@ -942,7 +942,7 @@ a div.action_box {
     height: 440px;
     position: relative;
     left: 6%;
-    top: 90vh;
+    top: 120vh;
     color: black;
     margin: 0;
   }
