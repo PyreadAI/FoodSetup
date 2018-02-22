@@ -1,0 +1,1 @@
+\w{1,}(.)\1\w{1,}\b matches strings with characters repeated once
