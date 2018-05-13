@@ -6,6 +6,7 @@ import { Features } from './components/FeaturesContainer';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
+var atob = require('atob');
 
 
 export class MainPage extends React.Component<any, any> {
@@ -13,12 +14,55 @@ export class MainPage extends React.Component<any, any> {
         super(props);
         // this.props.dispatch(userActions.logout());
         // localStorage.removeItem('user');
-        console.log(this.props.params);
+        this.state={
+            loggedin:''
+        }
+    }
+    private validateJWT(token) {
+        let payload;
+        if (token) {
+            payload = token.split('.')[1];
+            payload = atob(payload);
+            return JSON.parse(payload);
+        } else {
+            return null;
+        }
+    }
+    componentWillMount() {
+        let token:string = localStorage.getItem('user');
+        if(token){
+            let obj:any = this.validateJWT(token);
+            let checker = obj.exp > Date.now() / 1000;
+            if(!checker){
+                localStorage.removeItem('user');
+                console.log('token expired');
+                createBrowserHistory().push('/');
+            }
+        }
+    }
+    private checkLocalStorage():any{
+        let token:string = localStorage.getItem('user');
+        if(token){
+            let obj = this.validateJWT(token);
+            if(obj){
+                return obj.name;
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+    componentDidMount(){
+        let checker = this.checkLocalStorage();
+        if(checker !== null){
+            this.setState({loggedin:checker});
+        }
     }
     private usersignup(name, password, email) {
         let info: any = {};
         info['name'] = name;
-        info['email'] = email;
+        info['email'] = email;  
         info['password'] = password;
         return axios.post('/usersignup', info, {
             headers: {
@@ -26,40 +70,81 @@ export class MainPage extends React.Component<any, any> {
             }
         }).then((res: any) => {
             console.log(JSON.stringify(res.data));
-            if (res.data.id && res.data.token) {
+            if (res.data.user) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 console.log('enter usersignup')
-                localStorage.setItem('user', JSON.stringify(res.data.id));
+                localStorage.setItem('user', JSON.stringify(res.data.user));
                 console.log('enter signup');
-                createBrowserHistory().push('/signup');
+                // this.setState({loggedin:name})
+                createBrowserHistory().push('/login');
+            }else{
+                alert("signup failed")
             }
         }).catch((err: any) => {
             alert('enter' + err.body);
             return err;
         })
     }
-    private signup(name,password,email){
+    private userlogin(email, password){
+        let info: any = {};
+        info['email'] = email;
+        info['password'] = password;
+        return axios.post('/userlogin', info, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res: any) => {
+            // console.log(JSON.stringify(res.data));
+            if (res.data.user) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                console.log('enter userlogin')
+                localStorage.setItem('user', JSON.stringify(res.data.user));
+                
+                createBrowserHistory().push('/login');
+                // this.setState({loggedin:name})
+                //alert('enter userlogin');
+            }else{
+                alert("login failed please check your password")
+            }
+        }).catch((err: any) => {
+            alert('enter' + err.body);
+            return err;
+        })
+    }
+    private signup(name, password, email) {
         console.log(name);
         this.usersignup(name, password, email);
         return true;
     }
+    private login(email, password){
+        this.userlogin(email, password);
+        console.log(email);
+    }
     private handleSubmit(action: string, info: any) {
         console.log(JSON.stringify(info))
         if (action === 'signup') {
-            const { name, password,email } = info;
+            const { name, password, email } = info;
             if (email && name && password) {
                 console.log('handle')
                 this.signup(name, password, email);
             }
-        } else {
-            alert('enter');
+        } else if(action === 'login') {
+            const {email, password} = info;
+            if (email && password) {
+                console.log('handle')
+                this.login(email, password);
+            }
+            // alert('enter');
+        } else{
+            localStorage.removeItem('user');
+            createBrowserHistory().push('/');
         }
 
     }
     render() {
         return (<div id="mainPage">
-            <NavBar handleSubmit={this.handleSubmit.bind(this)} />
-            <OrderButton  />
+            <NavBar handleSubmit={this.handleSubmit.bind(this)} loggedin={this.state.loggedin} />
+            <OrderButton />
             <Carousel imgs={[
                 { src: 'images/food1.png', description: 'some description here some description here some description here some description here some description here some description here some description here', title: 'salad0', price: '', recipe: '' },
                 { src: 'images/food1.png', description: 'some description here some description here some description here some description here some description here some description here some description here', title: 'salad1', price: '', recipe: '' },

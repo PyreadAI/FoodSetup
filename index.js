@@ -108,11 +108,59 @@ app.post('/usersignup', function (req, response) {
 	client.query(text, values, (err, res) => {
 		if (err) {
 			console.log(err);
+			response.send({
+				user: null
+			})
 		} else {
-			let jwt = generateJWT(name,email);
-			console.log(jwt);
+			let jwt = generateJWT(name, email);
+			response.send({
+				user: jwt
+			});
 		}
 	});
+});
+app.post('/userlogin', function (req, response) {
+	console.log(req.body);
+	// { name: '121', email: '12@kds.com', password: '12' }
+	// let pw_number = parseInt(req.body.pw);
+	// const text = 'INSERT INTO users(name, email,salt,password) VALUES($1, $2, $3, $4)'
+	//123@321.com
+	//123
+	const {
+		email,
+		password
+	} = req.body;
+	const query = {
+		// give the query a unique name
+		name: 'fetch-user',
+		text: 'SELECT * FROM users WHERE email = $1',
+		values: [email]
+	}
+	client.query(query, (err, res) => {
+		if (err) {
+			console.log(err);
+			// response.send({  });
+		} else {
+			console.log(JSON.stringify(res.rows[0]));
+			// response.send({ result: res });
+			let newpassword = crypto.pbkdf2Sync(password, res.rows[0].salt, 1000, 64, 'sha512').toString('hex');
+			//get hash from db
+			let checker = res.rows[0].password === newpassword ? true : false;
+			// console.log(str);
+			if (checker) {
+				let token = generateJWT(res.rows[0].name, res.rows[0].email);
+				// console.log(getUserDetails(token));
+				response.send({
+					user: token
+				})
+			} else {
+				response.send({
+					user: null
+				})
+			}
+
+		}
+	})
 });
 // client.query("SELECT MIN(U.cost) FROM utilities U, utilitiesmanager UM WHERE U.uid = UM.uid AND UM.mid =" + mid, (err, res) => {
 // 	if (err) {

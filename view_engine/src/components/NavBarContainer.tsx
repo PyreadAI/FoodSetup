@@ -16,7 +16,7 @@ export class NavBar extends React.Component<any, any> {
     render() {
         return (<div className="container">
         <Logo />
-        <Buttons handleSubmit={this.props.handleSubmit} />
+        <Buttons handleSubmit={this.props.handleSubmit} loggedin={this.props.loggedin} />
       </div>)
     }
 }
