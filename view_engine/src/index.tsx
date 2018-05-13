@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import {Main} from "./main"
+import {Main} from "./main";
+import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
 
 const render = (Component: any) => {
@@ -9,7 +10,8 @@ const render = (Component: any) => {
             <AppContainer>
                 <Component />
             </AppContainer>,
-        document.getElementById("container")
+
+        document.getElementById("hook")
     );
 }
 

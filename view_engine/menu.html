@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parser Delicacy Delivery</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+  </head>
+<body>
+
+<div id="menu">
+<div id="top-header">
+  <div class="container">
+    <div class="pull-left" id="logo">
+      <p id="logo-text">Parser</p>
+      <p id="logo-slogan">we redefine takeout.</p>
+    </div>
+    <div class="buttons">
+      <button class="button1"><a href="index.html">home</a></button>
+      <button class="button1">menu</button>
+      <button class="button1">membership</button>
+      <button class="button1">about us</button>
+      <button type="button2" id="user-login" data-toggle="modal" data-target="#myModal">log in | sign up</button>
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header modal-background">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Welcome to Parser!</h4>
+                  <input type="name" name="user-name" placeholder="Name"><br>
+                  <input type="password" name="user-password" placeholder="Password"><br>
+                  <a href="#"  id="reset"><span>forget password?</span></a><br>
+                  <button type="button" class="btn-login" data-dismiss="modal"><span>Log In</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <img src="images/cart.png" alt="shopping cart" id="cart-img">
+        <p id="cart" class="cart-text-original"><a href="#">cart</a></p>
+    </div>
+  </div>
+</div>
+
+<div id="category">
+  <div class="container">
+      <div class="col-md-2 col-sm-4 col-xs-6 col-xxs-12 clink" onclick="hideDiv()">
+        <div id="all">all</div>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6 col-xxs-12 clink" onclick="hideDiv()">
+        <div id="special">special</div>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6 col-xxs-12 clink" onclick="hideDiv()">
+        <div id="daily">daily</div>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6 col-xxs-12 clink" onclick="hideDiv()">
+        <div id="feast">feast</div>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6 col-xxs-12 clink" onclick="showDiv()">
+        <div id="fitness">fitness</div>
+      </div>
+      <div class="col-md-2 col-sm-4 col-xs-6 col-xxs-12 clink" onclick="hideDiv()">
+        <div id="business">business</div>
+      </div>
+  </div>
+</div>
+
+<div id="items">
+  <div id="fitnessMeal" class="container" style="display:block">
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton1()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay1">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton1()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton1"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton2()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay2">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton2()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton2"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton3()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay3">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton3()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton3"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton4()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay4">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton4()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton4"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton5()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay5">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton5()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton5"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton6()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay6">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton6()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton6"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton6()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay6">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton6()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton6"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton6()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay6">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton6()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton6"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+        <div id="fitness1" class="fitnessPic1 fitnessText1">
+            <p id="fitnessTitle1">Chicken Breast Salad</p>
+            <p id="fitnessParagraph1">
+              100g Chicken Breast, 200g Vegetables, 50g Bread
+              Carbohydrate-24.6g  Calories-160.1kcal  Protein-33.2g  Fat-8.7g  Fibre-9.1g
+            </p>
+            <p id="fitnessPrice1">15.50 CAD</p>
+            <div id="fitnessCart">
+              <div class="Amount">Amount</div>
+              <div id="minusFitnessButton1" onclick="minusFitnessButton6()"><div class="minusMark">-</div></div>
+              <div id="numberFitnessDisplay1"><div id="fitnessDisplay6">1</div></div>
+              <div id="plusFitnessButton1" onclick="plusFitnessButton6()"><div class="addMark">+</div></div>
+              <div id="cartFitnessButton6"><div class="cartDisplay">add to cart</div></div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+</div>
+
+<!-- End of #main-content -->
+  <!-- jQuery (Bootstrap JS plugins depend on it) -->
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+  $(window).scroll(function() {
+  var height = $('#top-header').outerHeight(true);
+    if ($(window).scrollTop() > 0) {
+        $('#top-header').addClass('fix-search');
+        $('#top-header').addClass('navbar-fixed-top');
+        $(menu).css({"padding-top": height});
+      } else {
+        $('#top-header').removeClass('fix-search');
+        $('#top-header').removeClass('navbar-fixed-top');
+        $(menu).css({"padding-top": 0});
+      }
+  });
+  </script>
+</body>
+</html>
+

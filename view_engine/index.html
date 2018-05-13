@@ -22,11 +22,8 @@
     <link rel="stylesheet" href="./public/stylesheets/styles.css">
 </head>
 
-<body id="mainPages">
-    <div id="container">
-        
-    </div>
-
+<body>
+    <div id="hook"></div>
     <!-- Dependencies -->
     <script src="public/scripts/jquery-2.1.4.min.js"></script>
     <script src="public/scripts/bootstrap.min.js"></script>
@@ -37,6 +34,24 @@
 
     <!-- Main -->
     <script src="./dist/bundle.js"></script>
+    <script>
+        // $(window).scroll(function () {
+        //     var height = $('#top-header').outerHeight(true);
+        //     if ($(window).scrollTop() > 0) {
+        //         $('#top-header').addClass('fix-search');
+        //         $('#top-header').addClass('navbar-fixed-top');
+        //         $(menu).css({
+        //             "padding-top": height
+        //         });
+        //     } else {
+        //         $('#top-header').removeClass('fix-search');
+        //         $('#top-header').removeClass('navbar-fixed-top');
+        //         $(menu).css({
+        //             "padding-top": 0
+        //         });
+        //     }
+        // });
+    </script>
 </body>
 
 </html>

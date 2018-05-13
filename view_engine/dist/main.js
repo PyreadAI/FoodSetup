@@ -11,18 +11,19 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var PresentationalLoggin_1 = require("./components/PresentationalLoggin");
+var MainPageContainer_1 = require("./MainPageContainer");
+var MenuContainer_1 = require("./MenuContainer");
+var react_router_dom_1 = require("react-router-dom");
 var Main = /** @class */ (function (_super) {
     __extends(Main, _super);
     function Main() {
         return _super.call(this) || this;
     }
-    Main.prototype.login = function (info) {
-        console.log(JSON.stringify(info));
-        return true;
-    };
     Main.prototype.render = function () {
-        return React.createElement(PresentationalLoggin_1.Loggin, { login: this.login.bind(this) });
+        return React.createElement(react_router_dom_1.HashRouter, { history: react_router_dom_1.hashHistory },
+            React.createElement(react_router_dom_1.Switch, null,
+                React.createElement(react_router_dom_1.Route, { exact: true, path: "/", component: MainPageContainer_1.MainPage }),
+                React.createElement(react_router_dom_1.Route, { path: "/menu", component: MenuContainer_1.Menu })));
     };
     return Main;
 }(React.Component));
