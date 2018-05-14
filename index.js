@@ -92,33 +92,6 @@ function validatePassword(password) {
 		}
 	})
 }
-app.post('/usersignup', function (req, response) {
-	console.log(req.body);
-	// { name: '121', email: '12@kds.com', password: '12' }
-	// let pw_number = parseInt(req.body.pw);
-	// const text = 'INSERT INTO users(name, email,salt,password) VALUES($1, $2, $3, $4)'
-	const {
-		name,
-		email,
-		password
-	} = req.body;
-	let info = setPassword(password);
-	const values = [name, email, info.salt, info.password];
-	const text = 'INSERT INTO users(name, email,salt,password) VALUES($1, $2, $3, $4)'
-	client.query(text, values, (err, res) => {
-		if (err) {
-			console.log(err);
-			response.send({
-				user: null
-			})
-		} else {
-			let jwt = generateJWT(name, email);
-			response.send({
-				user: jwt
-			});
-		}
-	});
-});
 app.post('/userlogin', function (req, response) {
 	console.log(req.body);
 	// { name: '121', email: '12@kds.com', password: '12' }
