@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c0aaa0c339f982fd1961"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e5ea2741a290f5ddcab3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -17768,6 +17768,7 @@ var CarouselContainer_1 = __webpack_require__("./src/components/CarouselContaine
 var FeaturesContainer_1 = __webpack_require__("./src/components/FeaturesContainer.tsx");
 var history_1 = __webpack_require__("./node_modules/history/es/index.js");
 var axios_1 = __webpack_require__("./node_modules/axios/index.js");
+var react_router_dom_1 = __webpack_require__("./node_modules/react-router-dom/es/index.js");
 var atob = __webpack_require__("./node_modules/atob/browser-atob.js");
 var MainPage = /** @class */ (function (_super) {
     __extends(MainPage, _super);
@@ -17818,13 +17819,14 @@ var MainPage = /** @class */ (function (_super) {
             return null;
         }
     };
-    MainPage.prototype.componentDidMount = function () {
-        var checker = this.checkLocalStorage();
-        if (checker !== null) {
-            this.setState({ loggedin: checker });
-        }
-    };
+    // componentDidMount(){
+    //     let checker = this.checkLocalStorage();
+    //     if(checker !== null){
+    //         this.setState({loggedin:checker});
+    //     }
+    // }
     MainPage.prototype.usersignup = function (name, password, email) {
+        var _this = this;
         var info = {};
         info['name'] = name;
         info['email'] = email;
@@ -17840,8 +17842,8 @@ var MainPage = /** @class */ (function (_super) {
                 console.log('enter usersignup');
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 console.log('enter signup');
-                // this.setState({loggedin:name})
-                history_1.createBrowserHistory().push('/login');
+                // createBrowserHistory().push('/login');
+                _this.setState({ loggedin: name });
             }
             else {
                 alert("signup failed");
@@ -17852,6 +17854,7 @@ var MainPage = /** @class */ (function (_super) {
         });
     };
     MainPage.prototype.userlogin = function (email, password) {
+        var _this = this;
         var info = {};
         info['email'] = email;
         info['password'] = password;
@@ -17865,8 +17868,8 @@ var MainPage = /** @class */ (function (_super) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 console.log('enter userlogin');
                 localStorage.setItem('user', JSON.stringify(res.data.user));
-                history_1.createBrowserHistory().push('/login');
-                // this.setState({loggedin:name})
+                // createBrowserHistory().push('/login');
+                _this.setState({ loggedin: name });
                 //alert('enter userlogin');
             }
             else {
@@ -17905,12 +17908,21 @@ var MainPage = /** @class */ (function (_super) {
         }
         else {
             localStorage.removeItem('user');
-            history_1.createBrowserHistory().push('/');
+            // createBrowserHistory().push('/');
+            this.setState({ loggedin: 'logout' });
         }
     };
     MainPage.prototype.render = function () {
+        if (this.state.loggedin !== '') {
+            console.log('redirect');
+            console.log(this.props.pathname);
+            var from = { from: { pathname: this.props.pathname } }.from;
+            // const { from } = { from: { pathname: "/" } };
+            return React.createElement(react_router_dom_1.Redirect, { to: from });
+        }
+        console.log(this.props);
         return (React.createElement("div", { id: "mainPage" },
-            React.createElement(NavBarContainer_1.NavBar, { handleSubmit: this.handleSubmit.bind(this), loggedin: this.state.loggedin }),
+            React.createElement(NavBarContainer_1.NavBar, { handleSubmit: this.handleSubmit.bind(this) }),
             React.createElement(PresentationalOrderButton_1.OrderButton, null),
             React.createElement(CarouselContainer_1.Carousel, { imgs: [
                     { src: 'images/food1.png', description: 'some description here some description here some description here some description here some description here some description here some description here', title: 'salad0', price: '', recipe: '' },
@@ -18010,10 +18022,37 @@ var Buttons = /** @class */ (function (_super) {
     function Buttons(props) {
         return _super.call(this, props) || this;
     }
+    Buttons.prototype.validateJWT = function (token) {
+        var payload;
+        if (token) {
+            payload = token.split('.')[1];
+            payload = atob(payload);
+            return JSON.parse(payload);
+        }
+        else {
+            return null;
+        }
+    };
+    Buttons.prototype.checkLocalStorage = function () {
+        var token = localStorage.getItem('user');
+        if (token) {
+            var obj = this.validateJWT(token);
+            if (obj) {
+                return obj.name;
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
+    };
     Buttons.prototype.render = function () {
         var _this = this;
-        var boxa = this.props.loggedin !== '' ? React.createElement("button", { type: "button2", id: "user-login", disabled: true }, "Hello, " + this.props.loggedin + " | ") : React.createElement("button", { type: "button2", id: "user-login", "data-toggle": "modal", "data-target": "#myLogin" }, "log in | ");
-        var boxb = this.props.loggedin !== '' ? React.createElement("button", { type: "button3", id: "user-logout", onClick: function (e) {
+        var checker = this.checkLocalStorage();
+        var boxa = checker ? React.createElement("button", { type: "button2", id: "user-login", disabled: true }, "Hello, " + checker + " | ") : React.createElement("button", { type: "button2", id: "user-login", "data-toggle": "modal", "data-target": "#myLogin" }, "log in | ");
+        var boxb = checker ? React.createElement("button", { type: "button3", id: "user-logout", onClick: function (e) {
                 _this.props.handleSubmit('signout');
             } }, "log out") : React.createElement("button", { type: "button2", id: "user-signup", "data-toggle": "modal", "data-target": "#mySignup" }, "sign up");
         return (React.createElement("div", { className: "buttons" },
@@ -18218,7 +18257,7 @@ var NavBar = /** @class */ (function (_super) {
     NavBar.prototype.render = function () {
         return (React.createElement("div", { className: "container" },
             React.createElement(PresentationalLogo_1.Logo, null),
-            React.createElement(ButtonsContainer_1.Buttons, { handleSubmit: this.props.handleSubmit, loggedin: this.props.loggedin })));
+            React.createElement(ButtonsContainer_1.Buttons, { handleSubmit: this.props.handleSubmit })));
     };
     return NavBar;
 }(React.Component));
